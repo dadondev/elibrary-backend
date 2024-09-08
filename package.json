@@ -5,7 +5,8 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "nodemon ts-node-dev src/index.ts",
-		"build": "npx tsc --init"
+		"build": "npx tsc --init",
+		"start": "node ./src/index.js"
 	},
 	"keywords": [],
 	"author": "",
@@ -28,6 +29,9 @@
 	"devDependencies": {
 		"@types/express": "^4.17.21",
 		"@types/node": "^22.5.4",
+		"@typescript-eslint/eslint-plugin": "^8.4.0",
+		"@typescript-eslint/parser": "^8.4.0",
+		"eslint": "^9.10.0",
 		"nodemon": "^3.1.4",
 		"ts-node": "^10.9.2",
 		"ts-node-dev": "^2.0.0",
