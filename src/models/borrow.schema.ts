@@ -5,9 +5,11 @@ import * as mongoose from "mongoose";
 const borrowSchema = new mongoose.Schema({
 	userId: {
 		type: mongoose.Schema.ObjectId,
+		unique: true,
 	},
 	bookId: {
 		type: mongoose.Schema.ObjectId,
+		unique: true,
 	},
 	takeDate: {
 		type: Date,
