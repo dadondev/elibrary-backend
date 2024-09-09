@@ -32,7 +32,7 @@ async function bootstrap() {
 
 bootstrap();
 
-cron.schedule("0 6 * * 1-6", async () => {
+cron.schedule("* * * * 1-6", async () => {
 	await cronService.examineBorrows();
 	console.log("I send sms all users!");
 });

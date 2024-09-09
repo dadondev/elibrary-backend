@@ -34,8 +34,10 @@ class borrowService {
 			throw new Error("The book already borrowed");
 		if (book.status === "missing") throw new Error("The book is missing");
 		book.status = "borrowed";
-		await book.save();
+
 		const newBorrow = await borrowSchema.create(validatedData);
+		book.borrowId = newBorrow._id + "";
+		await book.save();
 		return new borrowDto(newBorrow);
 	}
 	async changeTakeDate(id: string, date: Date) {

@@ -1,6 +1,5 @@
 /** @format */
 
-
 export class takeBookDto {
 	phoneNumber: string;
 	bookName: string;
@@ -8,7 +7,8 @@ export class takeBookDto {
 	takeDate: Date;
 	returnDate: Date;
 	constructor(data: any, user: any, book: any) {
-		this.phoneNumber = data.phoneNumber;
+		console.log(user);
+		this.phoneNumber = user.phoneNumber;
 		this.bookName = book.name;
 		this.fullName = `${user.lastName} ${user.firstName}`;
 		this.takeDate = data.takeDate;
