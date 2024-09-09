@@ -10,16 +10,31 @@ import bookRouter from "./routes/book.routes";
 import borrowRouter from "./routes/borrow.routes";
 import cron from "node-cron";
 import cronService from "./services/cron.service";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import authRouter from "./routes/auth.routes";
+import { authMiddleware } from "./middlewares/auth.middleware";
+
+const corsOptions = {
+	origin: "*",
+	methods: ["GET", "POST", "DELETE", "PATCH", "PUT"],
+	credentials: true,
+	optionsSuccessStatus: 200,
+};
 
 const app = express();
 
+// app.use(cors(corsOptions));
+
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet({}));
 app.use(morgan("dev"));
-app.use("/api/catalogs", catalogRouter);
-app.use("/api/books", bookRouter);
-app.use("/api/borrow", borrowRouter);
+app.use("/api/catalogs", authMiddleware, catalogRouter);
+app.use("/api/books", authMiddleware, bookRouter);
+app.use("/api/borrow", authMiddleware, borrowRouter);
+app.use("/api/auth", authMiddleware, authRouter);
 
 async function bootstrap() {
 	try {

@@ -14,11 +14,24 @@ const adminSchema = new mongoose.Schema({
 	phoneNumber: {
 		type: String,
 		required: true,
+		unique: true,
 	},
 	role: {
-		enum: ["primary", "secondary", "third"],
-		default: "third",
+		enum: ["primary", "secondary"],
+		default: "secondary",
 		type: String,
+	},
+	password: {
+		type: String,
+		required: true,
+	},
+	accessToken: {
+		type: String,
+		default: null,
+	},
+	refreshToken: {
+		type: String,
+		default: null,
 	},
 });
 

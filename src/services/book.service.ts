@@ -1,6 +1,5 @@
 /** @format */
 
-import mongoose from "mongoose";
 import bookDto from "../dtos/book.dto";
 import bookSchema from "../models/book.schema";
 import bookValidator from "../validators/book.validator";
