@@ -16,10 +16,10 @@ class cronService {
 		const weekDay = format(today, "EEEE");
 		if (weekDay === "Sunday") return;
 		allBorrows.forEach(async (borrow) => {
-			if (differenceInDays(borrow.sendSMS, new Date()) === 0) {
-				console.log("already send SMS");
-				return;
-			}
+			// if (differenceInDays(borrow.sendSMS, new Date()) === 0) {
+			// 	console.log("already send SMS");
+			// 	return;
+			// }
 			const resp = compareDate(borrow.returnDate, today);
 			if (resp === "earn") return;
 			if (resp === "equal") return await equalSendSMS(borrow as any);
