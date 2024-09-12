@@ -34,7 +34,8 @@ app.use(morgan("dev"));
 app.use("/api/catalogs", authMiddleware, catalogRouter);
 app.use("/api/books", authMiddleware, bookRouter);
 app.use("/api/borrow", authMiddleware, borrowRouter);
-app.use("/api/auth", authMiddleware, authRouter);
+app.use("/api/auth", authRouter);
+//
 
 async function bootstrap() {
 	try {
