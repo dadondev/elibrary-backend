@@ -33,13 +33,7 @@ class authController {
 			if (!data.special) throw new Error("You can't add admin!");
 			const resp = await authService.register(data);
 
-			res.cookie("accessToken", resp.tokens.accessToken, {
-				maxAge: 43200000,
-			});
-			res.cookie("refreshToken", resp.tokens.refreshToken, {
-				maxAge: 30 * 24 * 60 * 60 * 1000,
-			});
-			return res.status(200).json(resp.user);
+			return res.status(201).json(resp);
 		} catch (error) {
 			const err = error as Error;
 			return res.status(400).json({
@@ -51,14 +45,7 @@ class authController {
 		try {
 			const data = req.body;
 			const resp = await authService.login(data);
-			return res
-				.cookie("tokens", resp.tokens, {
-					httpOnly: true,
-					secure: true,
-					sameSite: "none",
-				})
-				.status(200)
-				.json(resp.user);
+			return res.status(200).json(resp);
 		} catch (error) {
 			const err = error as Error;
 			return res.status(400).json({

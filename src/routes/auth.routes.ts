@@ -6,7 +6,7 @@ import { authMiddleware } from "../middlewares/auth.middleware";
 
 const authRouter = e.Router();
 
-authRouter.post("/register", authMiddleware, authController.register);
+authRouter.post("/register", authController.register);
 authRouter.post("/login", authController.login);
 authRouter.patch(
 	"/edit/changePhoneNumber/:id",

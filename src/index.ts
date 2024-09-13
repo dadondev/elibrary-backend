@@ -16,7 +16,7 @@ import authRouter from "./routes/auth.routes";
 import { authMiddleware } from "./middlewares/auth.middleware";
 
 const corsOptions = {
-	origin: "*",
+	origin: ["http://localhost:3000", "https://"],
 	methods: ["GET", "POST", "DELETE", "PATCH", "PUT"],
 	credentials: true,
 	optionsSuccessStatus: 200,
@@ -24,8 +24,7 @@ const corsOptions = {
 
 const app = express();
 
-// app.use(cors(corsOptions));
-
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -35,7 +34,6 @@ app.use("/api/catalogs", authMiddleware, catalogRouter);
 app.use("/api/books", authMiddleware, bookRouter);
 app.use("/api/borrow", authMiddleware, borrowRouter);
 app.use("/api/auth", authRouter);
-//
 
 async function bootstrap() {
 	try {

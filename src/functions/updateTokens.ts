@@ -17,18 +17,18 @@ export async function updateTokens(admin: any) {
 		});
 		await admin.save();
 	}
-	const expiredAT = jwt.verify(accessToken, JWT_SECRET);
+	try {
+		const expiredAT = jwt.verify(accessToken, JWT_SECRET);
 	const expiredRT = jwt.verify(refreshToken, JWT_SECRET);
-	if (typeof expiredAT === "string") {
+	} catch(error){
 		admin.accessToken = jwt.sign({ ...new jwtDto(admin) }, JWT_SECRET, {
-			expiresIn: "12h",
+				expiresIn: "12h",
 		});
-	}
-	if (typeof expiredRT === "string") {
 		admin.refreshToken = jwt.sign({ ...new jwtDto(admin) }, JWT_SECRET, {
-			expiresIn: "30d",
+				expiresIn: "30d",
 		});
 	}
+	
 
 	await admin.save();
 	return {
