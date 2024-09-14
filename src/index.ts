@@ -16,7 +16,7 @@ import authRouter from "./routes/auth.routes";
 import { authMiddleware } from "./middlewares/auth.middleware";
 
 const corsOptions = {
-	origin: ["http://localhost:3000", "https://"],
+	origin: ["http://localhost:3000", "https://elibrary-production.vercel.app"],
 	methods: ["GET", "POST", "DELETE", "PATCH", "PUT"],
 	credentials: true,
 	optionsSuccessStatus: 200,
