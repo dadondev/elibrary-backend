@@ -11,8 +11,7 @@ export async function authMiddleware(
 	res: Response,
 	next: () => void
 ) {
-	const token = req.headers["Authorization"]
-
+	const token = req.headers.authorization
 	if(!token) return res.status(401).json({message:"Authorization failed."});
 	const userData:any = jwt.decode(token as string)
 	if(!userData) return res.status(401).json({message:"Invalid token"});
