@@ -16,7 +16,7 @@ import authRouter from "./routes/auth.routes";
 import { authMiddleware } from "./middlewares/auth.middleware";
 
 const corsOptions = {
-	origin: "*",
+	origin: ["*", "http://localhost:3000"],
 	methods: ["GET", "POST", "DELETE", "PATCH", "PUT"],
 	credentials: true,
 	optionsSuccessStatus: 200,
