@@ -11,22 +11,22 @@ export async function authMiddleware(
 	res: Response,
 	next: () => void
 ) {
-	const { accessToken, refreshToken } = req.cookies;
-	if (!accessToken)
-		return res.status(400).json({ message: "Authorization failed" });
-	if (!refreshToken)
-		return res.status(400).json({ message: "Authorization failed" });
-	const user = jwt.decode(accessToken);
-	if (!user || typeof user === "string")
-		return res.status(400).json({ message: "Authorization failed" });
-	const existUser = await adminSchema.findById(user.id);
-	if (!existUser)
-		return res.status(400).json({ message: "Authorization failed" });
+	const token = req.headers["Authorization"]
 
-	const expiredAT = jwt.verify(accessToken, JWT_SECRET);
-	const expiredRT = jwt.verify(accessToken, JWT_SECRET);
+	if(!token) return res.status(401).json({message:"Authorization failed."});
+	const userData:any = jwt.decode(token as string)
+	if(!userData) return res.status(401).json({message:"Invalid token"});
+	const existUser = await adminSchema.findById(userData.id)
+	try{
+		jwt.verify(token as string, JWT_SECRET)
+		return next()
+	}catch (e) {
+		try{
+			await updateTokens(existUser);
+			return next()
+		}catch (_) {
+			return res.status(401).json({message:"Authorization failed."});
+		}
 
-	if (typeof expiredAT === "string" || typeof expiredRT === "string")
-		await updateTokens(existUser);
-	next();
+	}
 }
