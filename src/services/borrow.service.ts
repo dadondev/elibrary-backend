@@ -90,6 +90,7 @@ class borrowService {
 		try {
 			await bookSchema.findByIdAndUpdate(existBorrow.bookId, {
 				status: "free",
+				borrowId:null
 			});
 			await historicSchema.create(existBorrow);
 		} catch (error) {
