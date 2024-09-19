@@ -36,8 +36,8 @@ class bookService {
 	) {
 		const book = await bookSchema.findById(id);
 		if (!book) throw new Error("Book is not found");
+		book.status = status;
 		if (status === "free") {
-			book.status = status;
 			book.borrowId = "";
 		} else if (status === "missing") {
 			book.borrowId = "";
